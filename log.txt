@@ -22,3 +22,15 @@ URL: /documentation
 URL: /favicon.ico
  Timestamp: Thu Aug 03 2023 20:14:46 GMT+0200 (Mitteleuropäische Sommerzeit)
 
+::1 - - [08/Aug/2023:20:41:31 +0000] "GET /documentation.html HTTP/1.1" 200 878 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+::1 - - [08/Aug/2023:20:41:31 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8080/documentation.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+::1 - - [08/Aug/2023:20:41:45 +0000] "GET /movies HTTP/1.1" 200 1978 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+::1 - - [08/Aug/2023:20:42:52 +0000] "GET /list HTTP/1.1" 404 143 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+::1 - - [08/Aug/2023:20:43:06 +0000] "GET /html HTTP/1.1" 404 143 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+::1 - - [08/Aug/2023:20:43:27 +0000] "GET / HTTP/1.1" 200 18 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+::1 - - [08/Aug/2023:20:44:16 +0000] "GET /mjkk HTTP/1.1" 404 143 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+::1 - - [08/Aug/2023:20:44:34 +0000] "GET /mjkk HTTP/1.1" 404 143 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+::1 - - [08/Aug/2023:20:44:37 +0000] "GET /mjkk HTTP/1.1" 404 143 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+::1 - - [08/Aug/2023:20:45:33 +0000] "GET /mjkk HTTP/1.1" 404 143 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+::1 - - [08/Aug/2023:20:45:48 +0000] "GET /mjkk HTTP/1.1" 404 143 "-" "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36"
+::1 - - [08/Aug/2023:20:47:19 +0000] "GET /documentation.html HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
