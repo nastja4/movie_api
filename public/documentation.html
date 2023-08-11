@@ -4,12 +4,35 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>myFlix_Documentation</title>
+        <style type="text/css">
+            body {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 14px;
+            }
+            table {
+                border-collapse: collapse;
+            }
+            td, th {
+                padding: 5px;
+                border: 1px solid black;                
+            }
+            tbody tr:nth-child(odd) {
+                background-color: aliceblue;
+            }
+            th {
+                background: rgb(59, 184, 233);
+            }       
+            ul {
+                list-style-type: none;
+            }     
+        </style>
     </head>
     <body>
         <header>
             <h1>myFlix</h1>  
             <h2>API Usage Guide</h2>         
         </header>
+
         <main>
              <h3>Introduction:</h3>
             <p>
@@ -17,7 +40,154 @@
                 <br>
                 The API provides an opportunity for Users to sign up, update their personal information, and create a list of their favorite movies.
             </p>
+            <br>
+            <table>
+                <thead>            
+                    <tr>
+                        <th>Business Logic</th>
+                        <th>URL</th>
+                        <th>HTTP Method</th>
+                        <th>Query parameters</th>
+                        <th>Request body data fomat</th>
+                        <th>Response body data format</th>
+                    </tr>    
+                </thead>        
+            
+                <tbody>
+                    <tr> <!-- 1 -->
+                        <td>Return a list of ALL movies to the user</td>
+                        <td>/movies</td>
+                        <td>GET</td>
+                        <td>None</td>
+                        <td>None</td>
+                        <td>A JSON object holding data about all movies</td>
+                    </tr>
+
+                    <tr> <!-- 2 -->
+                        <td>Return data (description, genre, director, image URL, whether it's featured or not) about a single movie by title to the user</td>
+                        <td>/movies/[Movie_Title]</td>
+                        <td>GET</td>
+                        <td>:title</td>
+                        <td>None</td>
+                        <td>A JSON object holding data about a single movie
+                        <!-- Example:
+                        <br>
+                        {<br>
+                            title: 'The Fifth Element',<br>
+                            year: '1997',<br>
+                            genres: ['Sci-fi', 'Action'],<br>
+                            country: 'France',<br>
+                            imageURL: 'Image URL of the movie cover',<br>
+                            description: 'In the colorful future, a cab driver unwittingly becomes the central figure in the search for a legendary cosmic weapon to keep Evil and Mr. Zorg at bay.'
+                            director: 'Luc Besson',<br>
+                            starring: ['Bruce Willis', 'Gary Oldman', 'Chris Tucker', 'Milla Jovovich']<br>                        
+                        } -->
+                        </td>
+                    </tr>
+
+                    <tr> <!-- 3 -->
+                        <td>Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
+                        <td>/movies/[Genres]/[Genre_Name]</td>
+                        <td>GET</td>
+                        <td>/genres/:genreName</td>
+                        <td>None</td>
+                        <td>A JSON object with a description of the movie genre</td>
+                    </tr>
+
+                    <tr> <!-- 4 -->
+                        <td>Return data about a director (bio, birth year, death year) by name</td>
+                        <td>/movies/[Directors]/[Director_Name]</td>
+                        <td>GET</td>
+                        <td>/directors/:directorName</td>
+                        <td>None</td>
+                        <td>
+                            A JSON object holding data about the director. Example:<br>
+                            {<br>
+                                name: "",<br>
+                                birthYear: "",<br>
+                                deathYear: "",<br>
+                                bio: ""<br>                                       
+                            }
+                        </td>
+                    </tr>
+
+                    <tr> <!-- 5 -->
+                        <td>Allow new users to register</td>
+                        <td>/users</td>
+                        <td>POST</td>
+                        <td>None</td>
+                        <td>
+                            A JSON object holding data about the user. Example:<br>
+                            {<br>
+                                "name": "",<br>
+                                "favoriteMovies": [""]<br>
+                            }
+                        </td>
+                        <td>
+                            A JSON object holding data about the registered user. Example:<br>
+                            {<br>                                
+                                "name": "",<br>
+                                "favoriteMovies": [""]<br>
+                                "id": "",<br>
+                            }
+                        </td>
+                    </tr>
+
+                    <tr> <!-- 6 -->
+                        <td>Allow users to update their user info (username)</td>
+                        <td>/users/[ID]</td>
+                        <td>PUT</td>
+                        <td>:id</td>
+                        <td>
+                            A JSON object holding data about the new Username. Example:<br>
+                            {<br>
+                                "name": "Updated_Name",<br>,
+                                "favoriteMovies": [""]<br>                              
+                            }
+                        </td>
+                        <td>
+                            A JSON object holding data about the Username. Example:<br>
+                            {<br>
+                                "id": "",<br>
+                                "name": "Updated_Name",<br>,
+                                "favoriteMovies": [""]<br>                                                                                              
+                            }
+                        </td>
+                    </tr>
+
+                    <tr> <!-- 7 -->
+                        <td>Allow users to add a movie to their list of favorites</td>
+                        <td>/users/[ID]/[Movie_Title]</td>
+                        <td>POST</td>
+                        <td>/:id/:movieTitle</td>
+                        <td>None</td>
+                        <td>A text message informing that a movie has been added to the user's favorite movies</td>
+                    </tr>
+
+                    <tr> <!-- 8 -->
+                        <td>Allow users to remove a movie from their list of favorites</td>
+                        <td>/users/[ID]/[Movie_Title]</td>
+                        <td>DELETE</td>
+                        <td>/:id/:movieTitle</td>
+                        <td>None</td>
+                        <td>A text message informing that a movie has been removed from the user's favorite movies</td>
+                    </tr>
+
+                    <tr> <!-- 9 -->
+                        <td>Allow existing users to deregister</td>
+                        <td>/users/[ID]</td>
+                        <td>DELETE</td>
+                        <td>:id</td>
+                        <td>None</td>
+                        <td>A text message that a user email has been removed from the database</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <!-- text, if any-->
+                </tfoot>                                          
+            </table>            
         </main>
+
         <footer>
             <!-- Text for footer, if any -->
         </footer>
