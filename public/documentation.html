@@ -67,7 +67,7 @@
                         <td>Return data (description, genre, director, image URL, whether it's featured or not) about a single movie by title to the user</td>
                         <td>/movies/[Movie_Title]</td>
                         <td>GET</td>
-                        <td>:title</td>
+                        <td>:Title</td>
                         <td>None</td>
                         <td>A JSON object holding data about a single movie
                         <!-- Example:
@@ -87,26 +87,26 @@
 
                     <tr> <!-- 3 -->
                         <td>Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
-                        <td>/movies/[Genres]/[Genre_Name]</td>
+                        <td>/movies/[Genre]/[Genre_Name]</td>
                         <td>GET</td>
-                        <td>/genres/:genreName</td>
+                        <td>/genre/:Name</td>
                         <td>None</td>
                         <td>A JSON object with a description of the movie genre</td>
                     </tr>
 
                     <tr> <!-- 4 -->
                         <td>Return data about a director (bio, birth year, death year) by name</td>
-                        <td>/movies/[Directors]/[Director_Name]</td>
+                        <td>/movies/[Director]/[Director_Name]</td>
                         <td>GET</td>
-                        <td>/directors/:directorName</td>
+                        <td>/director/:Name</td>
                         <td>None</td>
                         <td>
                             A JSON object holding data about the director. Example:<br>
                             {<br>
-                                name: "",<br>
-                                birthYear: "",<br>
-                                deathYear: "",<br>
-                                bio: ""<br>                                       
+                                Name: "",<br>
+                                Bio: "",<br>
+                                Birth: "",<br>
+                                Death: ""<br>                                                                       
                             }
                         </td>
                     </tr>
