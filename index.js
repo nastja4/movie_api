@@ -10,12 +10,9 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
 
 const Movies = Models.Movie;
 const Users = Models.User;
-// const Genres = Models.Genre;
-// const Directors = Models.Director;
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/cfDB', { 
@@ -28,7 +25,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/cfDB', {
 // -Start page-
 app.get('/', (req, res) => {
     res.send('Welcome to myFlix!');
-  });
+});
 
 
 // -!1- READ/ Return a list of ALL movies to the user
@@ -54,21 +51,11 @@ app.get('/movies/:Title', async (req, res) => {
             console.error(err);
             res.status(500).send('Error: ' + err);
         });
-    });
+});
 
 
-// -?? 3- READ/ Return data about a genre (description) by name/title
-// app.get('/movies/genres/:genreName', (req, res) => {
-//     const { genreName } = req.params;
-//     const genre = movies.find( movie => movie.genres.name === genreName ).genres;
-
-//     if (genre) {
-//         res.status(200).json(genre);
-//     } else {
-//         res.status(404).send('The genre was not found');
-//     }
-// })
-app.get('/movies/genre/:genreName', async (req, res) => { 
+// -!3- READ/ Return data about a genre (description) by name/title
+app.get('/movies/genres/:genreName', async (req, res) => { 
     await Movies.findOne({ 'Genre.Name': req.params.genreName })
         .then((movie) => {
             if (!movie) {
@@ -81,21 +68,24 @@ app.get('/movies/genre/:genreName', async (req, res) => {
             console.error(err);
             res.status(500).send('Error: ' + err);
         });
-})
+});
 
 
-// -?? 4- READ/ Return data about a director (bio, birth year, death year) by name
-// app.get('/movies/directors/:directorName', (req, res) => {
-//     const { directorName } = req.params;
-//     const director = movies.find( movie => movie.directors.name === directorName ).directors;
-
-//     if (director) {
-//         res.status(200).json(director);
-//     } else {
-//         res.status(404).send('The director was not found');
-//     }
-// })
-
+// -!4- READ/ Return data about a director (bio, birth year, death year) by name
+app.get('/movies/directors/:directorName', async (req, res) => { 
+    await Movies.findOne({ 'Director.Name': req.params.directorName })
+        .then((movie) => {
+            if (!movie) {
+                return res.status(404).send('Error: ' + req.params.directorName + ' was not found'); 
+            } else {
+                res.status(200).json(movie.Director);
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+});
 
 // -!5- CREATE/ Allow new users to register
 

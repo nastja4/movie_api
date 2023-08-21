@@ -73,7 +73,7 @@
                         <!-- Example:
                         <br>
                         {<br>
-                            title: 'The Fifth Element',<br>
+                            Title: 'The Fifth Element',<br>
                             year: '1997',<br>
                             genres: ['Sci-fi', 'Action'],<br>
                             country: 'France',<br>
@@ -89,16 +89,16 @@
                         <td>Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
                         <td>/movies/[Genre]/[Genre_Name]</td>
                         <td>GET</td>
-                        <td>/genre/:Name</td>
+                        <td>/genres/:Name</td>
                         <td>None</td>
-                        <td>A JSON object with a description of the movie genre</td>
+                        <td>A JSON object with a genre's name and description of the movie genre</td>
                     </tr>
 
                     <tr> <!-- 4 -->
                         <td>Return data about a director (bio, birth year, death year) by name</td>
                         <td>/movies/[Director]/[Director_Name]</td>
                         <td>GET</td>
-                        <td>/director/:Name</td>
+                        <td>/directors/:Name</td>
                         <td>None</td>
                         <td>
                             A JSON object holding data about the director. Example:<br>
@@ -119,15 +119,20 @@
                         <td>
                             A JSON object holding data about the user. Example:<br>
                             {<br>
-                                "name": "",<br>
-                                "favoriteMovies": [""]<br>
+                                "Username": "",<br>
+                                "Password": "",<br>
+                                "Email": "",
+                                "Birthday": "YYYY-MM-DD"<br>
                             }
                         </td>
                         <td>
                             A JSON object holding data about the registered user. Example:<br>
                             {<br>                                
-                                "name": "",<br>
-                                "favoriteMovies": [""]<br>
+                                "Username": "",<br>
+                                "Password": "",<br>
+                                "Email": "",
+                                "Birthday": "YYYY-MM-DD",<br>
+                                "FavoriteMovies": [""]<br>
                                 "id": "",<br>
                             }
                         </td>
@@ -141,43 +146,48 @@
                         <td>
                             A JSON object holding data about the new Username. Example:<br>
                             {<br>
-                                "name": "Updated_Name",<br>,
-                                "favoriteMovies": [""]<br>                              
+                                "Username": "Updated_Name",<br>,
+                                "Password": "",<br>
+                                "Email": "",
+                                "Birthday": "YYYY-MM-DD"<br>                                         
                             }
                         </td>
                         <td>
                             A JSON object holding data about the Username. Example:<br>
                             {<br>
                                 "id": "",<br>
-                                "name": "Updated_Name",<br>,
-                                "favoriteMovies": [""]<br>                                                                                              
+                                "Username": "",<br>
+                                "Password": "",<br>
+                                "Email": "",
+                                "Birthday": "YYYY-MM-DD",<br>
+                                "FavoriteMovies": [""]<br>                                                                                                                              
                             }
                         </td>
                     </tr>
 
                     <tr> <!-- 7 -->
                         <td>Allow users to add a movie to their list of favorites</td>
-                        <td>/users/[ID]/[Movie_Title]</td>
+                        <td>/users/[Username]/[movies]/[Movie_ID]</td>
                         <td>POST</td>
-                        <td>/:id/:movieTitle</td>
+                        <td>/users/:Username/movies/:MovieID</td>
                         <td>None</td>
-                        <td>A text message informing that a movie has been added to the user's favorite movies</td>
+                        <td>A JSON object holding data about added movie(s)</td>
                     </tr>
 
                     <tr> <!-- 8 -->
                         <td>Allow users to remove a movie from their list of favorites</td>
-                        <td>/users/[ID]/[Movie_Title]</td>
+                        <td>/users/[Username]/[movies]/[Movie_ID]</td>
                         <td>DELETE</td>
-                        <td>/:id/:movieTitle</td>
+                        <td>/users/:Username/movies/:MovieID</td>
                         <td>None</td>
-                        <td>A text message informing that a movie has been removed from the user's favorite movies</td>
+                        <td>A JSON object holding an updated list of favorite movie(s)</td>
                     </tr>
 
                     <tr> <!-- 9 -->
                         <td>Allow existing users to deregister</td>
-                        <td>/users/[ID]</td>
+                        <td>/users/[Username]</td>
                         <td>DELETE</td>
-                        <td>:id</td>
+                        <td>users/:Username</td>
                         <td>None</td>
                         <td>A text message that a user email has been removed from the database</td>
                     </tr>
