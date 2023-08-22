@@ -11,14 +11,19 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+let auth = require('./auth')(app); //  import the “auth.js” file
+const passport = require('passport'); // Passport module
+require('./passport'); // import the “passport.js” file
+
 const Movies = Models.Movie;
 const Users = Models.User;
-
 
 mongoose.connect('mongodb://127.0.0.1:27017/cfDB', { 
     useNewUrlParser: true, 
     useUnifiedTopology: true 
 });
+
+
 
 
 
@@ -28,8 +33,8 @@ app.get('/', (req, res) => {
 });
 
 
-// -!1- READ/ Return a list of ALL movies to the user
-app.get('/movies', async (req, res) => {
+// -1- READ/ Return a list of ALL movies to the user
+app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.find()
         .then((movies) => {
             res.status(201).json(movies);
@@ -41,8 +46,8 @@ app.get('/movies', async (req, res) => {
 });
 
 
-// -!2- READ/ Return data about a single movie by title to the user
-app.get('/movies/:Title', async (req, res) => {
+// -2- READ/ Return data about a single movie by title to the user
+app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), async (req, res) => {
     await Movies.findOne({ Title: req.params.Title})
         .then((movie) => {
             res.status(200).json(movie);
@@ -54,8 +59,8 @@ app.get('/movies/:Title', async (req, res) => {
 });
 
 
-// -!3- READ/ Return data about a genre (description) by name/title
-app.get('/movies/genres/:genreName', async (req, res) => { 
+// -3- READ/ Return data about a genre (description) by name/title
+app.get('/movies/genres/:genreName', passport.authenticate('jwt', {session: false}), async (req, res) => { 
     await Movies.findOne({ 'Genre.Name': req.params.genreName })
         .then((movie) => {
             if (!movie) {
@@ -71,8 +76,8 @@ app.get('/movies/genres/:genreName', async (req, res) => {
 });
 
 
-// -!4- READ/ Return data about a director (bio, birth year, death year) by name
-app.get('/movies/directors/:directorName', async (req, res) => { 
+// -4- READ/ Return data about a director (bio, birth year, death year) by name
+app.get('/movies/directors/:directorName', passport.authenticate('jwt', {session: false}), async (req, res) => { 
     await Movies.findOne({ 'Director.Name': req.params.directorName })
         .then((movie) => {
             if (!movie) {
@@ -87,7 +92,7 @@ app.get('/movies/directors/:directorName', async (req, res) => {
         });
 });
 
-// -!5- CREATE/ Allow new users to register
+// -5- CREATE/ Allow new users to register
 
 /* We’ll expect JSON in this format
 {
@@ -124,7 +129,7 @@ app.post('/users', async (req, res) => {
 });
 
 
-// -!6- UPDATE/ Allow users to update their user info (username)
+// -6- UPDATE/ Allow users to update their user info (username)
 
 /* We’ll expect JSON in this format
 {
@@ -136,7 +141,7 @@ app.post('/users', async (req, res) => {
   (required)
   Birthday: Date
 }*/
-app.put('/users/:Username', async (req, res) => { 
+app.put('/users/:Username', passport.authenticate('jwt', {session: false}), async (req, res) => { 
     await Users.findOneAndUpdate({ Username: req.params.Username }, 
     { $set:
         {
@@ -157,8 +162,8 @@ app.put('/users/:Username', async (req, res) => {
 });
 
 
-// -!7- CREATE/ Allow users to add a movie to their list of favorites
-app.post('/users/:Username/movies/:MovieID', async (req, res) => { 
+// -7- CREATE/ Allow users to add a movie to their list of favorites
+app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), async (req, res) => { 
     await Users.findOneAndUpdate({ Username: req.params.Username }, 
     { $push: { FavoriteMovies: req.params.MovieID }},
     { new: true }) // This line makes sure that the updated document is returned
@@ -172,8 +177,8 @@ app.post('/users/:Username/movies/:MovieID', async (req, res) => {
 });
 
 
-// -!8- DELETE/ Allow users to remove a movie from their list of favorites
-app.delete('/users/:Username/movies/:MovieID', async (req, res) => { 
+// -8- DELETE/ Allow users to remove a movie from their list of favorites
+app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), async (req, res) => { 
     await Users.findOneAndUpdate({ Username: req.params.Username }, 
     { $pull: { FavoriteMovies: req.params.MovieID }},
     { new: true }) // This line makes sure that the updated document is returned
@@ -187,8 +192,8 @@ app.delete('/users/:Username/movies/:MovieID', async (req, res) => {
 });
 
 
-// -!9- DELETE/ Allow existing users to deregister (by username)
-app.delete('/users/:Username', async (req, res) => { 
+// -9- DELETE/ Allow existing users to deregister (by username)
+app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), async (req, res) => { 
     await Users.findOneAndRemove({ Username: req.params.Username })
         .then((user) => {
             if (!user) {
