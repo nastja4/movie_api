@@ -25,13 +25,35 @@ mongoose.connect('mongodb://127.0.0.1:27017/cfDB', {
 
 
 
-
-
 // -Start page-
 app.get('/', (req, res) => {
     res.send('Welcome to myFlix!');
 });
 
+
+// -GET a user info-
+app.get('/users/:username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await Users.findOne({ Username: req.params.username })
+        .then((user) => {
+            res.status(201).json(user);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+});
+
+// -GET all the users-
+app.get('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await Users.find()
+        .then((users) => {
+            res.status(201).json(users);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+});
 
 // -1- READ/ Return a list of ALL movies to the user
 app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
@@ -142,6 +164,11 @@ app.post('/users', async (req, res) => {
   Birthday: Date
 }*/
 app.put('/users/:Username', passport.authenticate('jwt', {session: false}), async (req, res) => { 
+    // Condition to check the current user
+    if(req.user.Username !== req.params.Username){
+        return res.status(400).send('Permission denied');
+    }
+    // Condition ends
     await Users.findOneAndUpdate({ Username: req.params.Username }, 
     { $set:
         {
@@ -163,22 +190,43 @@ app.put('/users/:Username', passport.authenticate('jwt', {session: false}), asyn
 
 
 // -7- CREATE/ Allow users to add a movie to their list of favorites
+
+// app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), async (req, res) => { 
+//     await Users.findOneAndUpdate({ Username: req.params.Username }, 
+//     { $push: { FavoriteMovies: req.params.MovieID }},
+//     { new: true }) // This line makes sure that the updated document is returned
+//         .then((updatedUser) => {
+//             res.json(updatedUser);
+//         })
+//         .catch((err) => {
+//             console.error(err);
+//             res.status(500).send('Error: ' + err);
+//         });
+// });
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), async (req, res) => { 
-    await Users.findOneAndUpdate({ Username: req.params.Username }, 
-    { $push: { FavoriteMovies: req.params.MovieID }},
-    { new: true }) // This line makes sure that the updated document is returned
-        .then((updatedUser) => {
-            res.json(updatedUser);
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
-        });
+    await Users.findOneAndUpdate(
+        {             
+            Username: req.params.Username, 
+            FavoriteMovies: { $ne: req.params.MovieID } // Checks whether the movie is already in the FavoriteMovies array using the $ne (not equal) operator
+        },
+        { $addToSet: { FavoriteMovies: req.params.MovieID } },
+        { new: true }) // This line makes sure that the updated document is returned
+            .then((updatedUser) => {
+                if (updatedUser) {                
+                    res.json(updatedUser);
+                } else {
+                    res.status(404).send('The user has not been found or this movie is already in the list of favorites.');
+                }            
+            })
+            .catch((err) => {
+                console.error(err);
+                res.status(500).send('Error: ' + err);
+            });
 });
 
 
 // -8- DELETE/ Allow users to remove a movie from their list of favorites
-app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), async (req, res) => { 
+app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), async (req, res) => {     
     await Users.findOneAndUpdate({ Username: req.params.Username }, 
     { $pull: { FavoriteMovies: req.params.MovieID }},
     { new: true }) // This line makes sure that the updated document is returned
@@ -207,7 +255,6 @@ app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), a
             res.status(500).send('Error: ' + err);
         });
 });
-
 
 
 
