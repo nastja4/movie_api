@@ -1,5 +1,5 @@
 const cors = require('cors');
-app.use(cors());
+
 
 // if you want only certain origins to be given access, you’ll need to replace app.use(cors()); with the following code:
 // let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
@@ -27,6 +27,7 @@ const path = require('path');
 const app = express();
 const { check, validationResult } = ('express-validator');
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
