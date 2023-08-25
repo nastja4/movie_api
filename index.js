@@ -50,7 +50,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/cfDB', {
 
 // -Start page-
 app.get('/', (req, res) => {
-    res.send('Welcome to myFlix!');
+    res.send("Welcome to my movie app - myFlix! You're on the start page");
 });
 
 // -GET a user info-
