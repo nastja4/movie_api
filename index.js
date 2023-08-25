@@ -1,4 +1,3 @@
-const cors = require('cors');
 
 
 // if you want only certain origins to be given access, you’ll need to replace app.use(cors()); with the following code:
@@ -24,10 +23,14 @@ const morgan = require('morgan');
 // const uuid = require('uuid');
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
+
 const app = express();
-const { check, validationResult } = ('express-validator');
 
 app.use(cors());
+
+const { check, validationResult } = require('express-validator');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
