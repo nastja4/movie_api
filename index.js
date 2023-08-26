@@ -41,11 +41,17 @@ require('./passport'); // import the “passport.js” file
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://127.0.0.1:27017/cfDB', { 
+/* To connect to my local database via Mongoose */
+// mongoose.connect('mongodb://127.0.0.1:27017/cfDB', { 
+//     useNewUrlParser: true, 
+//     useUnifiedTopology: true 
+// });
+
+/* To connect to online database via Mongoose */
+mongoose.connect(process.env.CONNECTION_URI, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true 
 });
-
 
 
 // -Start page-
@@ -76,6 +82,7 @@ app.get('/users', passport.authenticate('jwt', { session: false }), async (req, 
             res.status(500).send('Error: ' + err);
         });
 });
+
 
 
 // -1- READ/ Return a list of ALL movies to the user

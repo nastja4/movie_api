@@ -199,3 +199,4 @@ URL: /favicon.ico
 ::1 - - [23/Aug/2023:11:35:40 +0000] "GET /users/AnastasiaFazius HTTP/1.1" 404 160 "-" "PostmanRuntime/7.32.3"
 ::1 - - [23/Aug/2023:11:38:51 +0000] "GET /users/AnastasiaFazius HTTP/1.1" 404 160 "-" "PostmanRuntime/7.32.3"
 ::1 - - [23/Aug/2023:12:56:22 +0000] "GET /users HTTP/1.1" 404 144 "-" "PostmanRuntime/7.32.3"
+127.0.0.1 - - [25/Aug/2023:11:36:55 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8888/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
