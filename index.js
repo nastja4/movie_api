@@ -170,7 +170,7 @@ app.post('/users',
             return res.status(422).json({ errors: errors.array() });
         }
 
-        let hashedPassword = Users.hashpassword(req.body.Password); // Using the function hashPassword (in models.js) to hash the password before storing it
+        let hashedPassword = Users.hashPassword(req.body.Password); // Using the function hashPassword (in models.js) to hash the password before storing it
         await Users.findOne({ Username: req.body.Username }) // Search to see if a user with the requested username already exists
             .then((user) => {
                 if (user) {
