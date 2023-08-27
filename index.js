@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
 app.get('/users/:username', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Users.findOne({ Username: req.params.username })
         .then((user) => {
-            res.status(201).json(user);
+            res.status(200).json(user);
         })
         .catch((err) => {
             console.error(err);
@@ -75,7 +75,7 @@ app.get('/users/:username', passport.authenticate('jwt', { session: false }), as
 app.get('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Users.find()
         .then((users) => {
-            res.status(201).json(users);
+            res.status(200).json(users);
         })
         .catch((err) => {
             console.error(err);
@@ -89,7 +89,7 @@ app.get('/users', passport.authenticate('jwt', { session: false }), async (req, 
 app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.find()
         .then((movies) => {
-            res.status(201).json(movies);
+            res.status(200).json(movies);
         })
         .catch((err) => {
             console.error(err);
@@ -183,7 +183,7 @@ app.post('/users',
                             Email: req.body.Email,
                             Birthday: req.body.Birthday
                         })
-                        .then((user) => { res.status(201).json(user) })
+                        .then((user) => { res.status(200).json(user) })
                         .catch((error) => {
                             console.error(error);
                             res.status(500).send('Error: ' + error);
@@ -230,11 +230,12 @@ app.put('/users/:Username', passport.authenticate('jwt', {session: false}),
             return res.status(400).send('Permission denied');
         }
         // Condition ends
+        let hashedPassword = Users.hashPassword(req.body.Password);
         await Users.findOneAndUpdate({ Username: req.params.Username }, 
         { $set:
             {
                 Username: req.body.Username,
-                Password: req.body.Password,
+                Password: hashedPassword,
                 Email: req.body.Email,
                 Birthday: req.body.Birthday
             }
