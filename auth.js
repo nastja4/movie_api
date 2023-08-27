@@ -33,7 +33,7 @@ module.exports = (router) => {
                     username: user.Username,
                     email: user.Email
                 };
-                let token = generateJWTToken(userMicro.toJSON());
+                let token = generateJWTToken(userMicro);
                 return res.json({ userMicro, token });
             });
         })(req, res);
