@@ -1,5 +1,4 @@
 
-
 // if you want only certain origins to be given access, you’ll need to replace app.use(cors()); with the following code:
 // let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
@@ -35,6 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 let auth = require('./auth')(app); //  import the “auth.js” file
+
 const passport = require('passport'); // Passport module
 require('./passport'); // import the “passport.js” file
 
