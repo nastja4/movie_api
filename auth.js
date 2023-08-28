@@ -29,7 +29,7 @@ module.exports = (router) => {
                 if (error) {
                     res.send(error);
                 }                
-                let userMicro = { Username: user.Username, Email: user.Email };
+                let userMicro = { Username: user.Username, Email: user.Email, _id: user._id };
                 let token = generateJWTToken(userMicro); // The reduced payload here
                 return res.json({ userMicro, token });
 
