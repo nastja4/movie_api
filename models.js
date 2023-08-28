@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 let movieSchema = mongoose.Schema({
     Title: {type: String, required: true},
@@ -42,4 +43,3 @@ let User = mongoose.model('User', userSchema);
 module.exports.Movie = Movie;
 module.exports.User = User;
 
-const bcrypt = require('bcrypt');
