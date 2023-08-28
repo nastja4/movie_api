@@ -42,16 +42,16 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 /* To connect to my local database via Mongoose */
-mongoose.connect('mongodb://127.0.0.1:27017/cfDB', { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true 
-});
-
-/* To connect to MongoDB Atlas online database via Mongoose */
-// mongoose.connect(process.env.CONNECTION_URI, { 
+// mongoose.connect('mongodb://127.0.0.1:27017/cfDB', { 
 //     useNewUrlParser: true, 
 //     useUnifiedTopology: true 
 // });
+
+/* To connect to MongoDB Atlas online database via Mongoose */
+mongoose.connect(process.env.CONNECTION_URI, { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+});
 
 
 // -Start page-
