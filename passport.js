@@ -48,8 +48,8 @@ passport.use(
             secretOrKey: 'your_jwt_secret'
         }, 
         async (jwtPayload, callback) => {
-            return await Users.findById(jwtPayload._id)
-            // return await Users.findOne({ username: jwtPayload.Username })           
+            // return await Users.findById(jwtPayload._id) // instead of find by username, find by user id, userMicro issue
+            return await Users.findOne({ username: jwtPayload.Username })           
             .then((user) => {
                 return callback(null, user);
             })
