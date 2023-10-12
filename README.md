@@ -1,4 +1,4 @@
-# movie_api (myFlix app server-side component)
+# Movie API (myFlix app server-side component)
 
 This API (Application Programming Interface) is the server-side component of the myFlix web application, which serves as the backend for managing and providing access to information about different movies, directors, and genres. Users can create profiles, save their favorite movies, and more. The actual storage of data is managed by a database, and this component handles the retrieval and processing of that data.
 
