@@ -101,9 +101,6 @@ The API follows security best practices to protect user data and ensure secure c
 ## Testing
 
 
-
-## Deployment
-
 ## Deployment
 
 The project is deployed on Heroku and can be accessed at [https://movies-my-flix-307c49ee24e7.herokuapp.com/](https://movies-my-flix-307c49ee24e7.herokuapp.com/).
