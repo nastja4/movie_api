@@ -15,7 +15,7 @@ const app = express();
 
 // if you want only certain origins to be given access, you’ll need to replace app.use(cors()); with the following code:
 // let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:8888', 'http://testsite.com', 'http://localhost:1234', 'https://movie-myflix.netlify.app'];
+let allowedOrigins = ['http://localhost:4200', 'http://localhost:8080', 'http://localhost:8888', 'http://testsite.com', 'http://localhost:1234', 'https://movie-myflix.netlify.app'];
 
 app.use(cors({
   origin: (origin, callback) => {
