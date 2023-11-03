@@ -69,7 +69,9 @@ The project follows a standard Node.js project structure. Here are some of the k
 
 ## Setup
 
+To run the myFlix server-side component, follow these steps:
 
+1. Clone this repository to your local machine:
 
 
 ## API Endpoints
