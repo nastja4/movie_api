@@ -152,13 +152,15 @@ Data validation is implemented to ensure that requests meet the required data fo
 The API follows security best practices to protect user data and ensure secure communication. It includes features like HTTPS and password hashing.
 
 ## Testing the API with Postman
+
 Postman, a popular tool designed for API development, allows you to test different aspects of your API, including its URL endpoints.
 Start by downloading [Postman](https://www.postman.com/downloads/](https://www.postman.com/downloads/).
 
 By using Postman to test your API, you can ensure that your endpoints are functioning as expected and that your API provides the correct responses to client requests.
 
 Screenshot:
-![Screenshot (252)](https://github.com/nastja4/movie_api/assets/126527606/8b851200-3025-48a8-9cb0-cf3b1a0efd01 =500x)
+
+<img src="https://github.com/nastja4/movie_api/assets/126527606/8b851200-3025-48a8-9cb0-cf3b1a0efd01" alt="Screenshot" width="700px">
 
 ## Deployment
 
