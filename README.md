@@ -14,10 +14,9 @@ This project is built using the MERN (MongoDB, Express, React, and Node.js) stac
 - [Authentication](#authentication)
 - [Data Validation](#data-validation)
 - [Data Security](#data-security)
-- [Testing](#testing)
+- [Testing the API with Postman](#testing-the-api-with-postman)
 - [Deployment](#deployment)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## User Stories
 
@@ -73,6 +72,58 @@ To run the myFlix server-side component, follow these steps:
 
 1. Clone this repository to your local machine:
 
+```
+git clone https://github.com/nastja4/movie_api.git
+```
+
+2. Navigate to the project directory:
+
+```
+cd movie_api
+```
+
+3. Install the project dependencies:
+
+To install Node, a version management tool called nvm (Node Version Manager) was used to install a specific and reliable version of Node. This tool allows you to easily upgrade (and downgrade if necessary) your version of Node to the latest LTS (long-term support) version.
+[NVM for Windows](https://github.com/coreybutler/nvm-windows#readme)
+[nvm’s GitHub repository page](https://github.com/nvm-sh/nvm)
+
+The following command to install all packages mentioned in the “package.json” file at once:
+
+```
+npm install
+```
+
+To install Express, run the following command in the terminal: 
+
+```
+npm install express
+```
+To install body-parser, run the following command in the terminal: 
+
+```
+npm install body-parser
+```
+
+To install Morgan - logging middleware for Express:
+
+```
+npm install morgan
+```
+
+To install Express, Body-parser, and Uuid (to generate universally unique identifiers):
+
+```
+npm install --save express uuid body-parser
+```
+
+4. Start the server:
+
+```
+npm start
+```
+The server will be running on `http://localhost:8888`.
+
 
 ## API Endpoints
 
@@ -100,8 +151,14 @@ Data validation is implemented to ensure that requests meet the required data fo
 
 The API follows security best practices to protect user data and ensure secure communication. It includes features like HTTPS and password hashing.
 
-## Testing
+## Testing the API with Postman
+Postman, a popular tool designed for API development, allows you to test different aspects of your API, including its URL endpoints.
+Start by downloading [Postman](https://www.postman.com/downloads/](https://www.postman.com/downloads/).
 
+By using Postman to test your API, you can ensure that your endpoints are functioning as expected and that your API provides the correct responses to client requests.
+
+Screenshot:
+![Screenshot (252)](https://github.com/nastja4/movie_api/assets/126527606/8b851200-3025-48a8-9cb0-cf3b1a0efd01 =500x)
 
 ## Deployment
 
@@ -110,10 +167,4 @@ The project is deployed on Heroku and can be accessed at [https://movies-my-flix
 ## Contributing
 
 Contributions are welcome. If you'd like to contribute to this project, please follow standard GitHub flow: fork, create a branch, make your changes, and submit a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-
 
